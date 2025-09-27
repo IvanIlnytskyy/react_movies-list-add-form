@@ -14,11 +14,12 @@ export const NewMovie: React.FC<Props> = ({ onAdd }) => {
   const [imdbUrl, setImdbUrl] = useState('');
   const [imdbId, setImdbId] = useState('');
 
-  const isFormValid =
-    title.trim() && imgUrl.trim() && imdbUrl.trim() && imdbId.trim();
+  const isFormValid: boolean =
+    [title, imgUrl, imdbUrl, imdbId].every((s) => s.trim() !== ''
+);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
     if (!isFormValid) {
       return;
     }
@@ -36,7 +37,7 @@ export const NewMovie: React.FC<Props> = ({ onAdd }) => {
     setImgUrl('');
     setImdbUrl('');
     setImdbId('');
-    setCount(prev => prev + 1);
+    setCount(previousCount => previousCount + 1);
   };
 
   return (
@@ -69,8 +70,8 @@ export const NewMovie: React.FC<Props> = ({ onAdd }) => {
       <TextField
         name="imdbUrl"
         label="Imdb URL"
-        value={imgUrl}
-        onChange={(value: string) => setImgUrl(value)}
+        value={imdbUrl}
+        onChange={(value: string) => setImdbUrl(value)}
         required
       />
 
